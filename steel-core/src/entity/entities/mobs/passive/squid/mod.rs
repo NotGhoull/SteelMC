@@ -153,9 +153,9 @@ impl SquidEntity {
 
         for _ in 0..INK_PARTICLE_COUNT {
             let direction = self.rotate_vector(DVec3::new(
-                f64::from(rand::random::<f32>()) * 0.6 - 0.3,
+                rand::random_range(-0.3..0.3),
                 -1.0,
-                f64::from(rand::random::<f32>()) * 0.6 - 0.3,
+                rand::random_range(-0.3..0.3),
             ));
             let offset = direction * f64::from(position_scale + rand::random::<f32>() * 2.0_f32);
             world.send_particles(particle.clone(), particle_position, 0, offset, 0.1);
@@ -174,7 +174,7 @@ impl SquidEntity {
                 state.tentacle_movement -= TAU as f32;
 
                 if rand::random_range(0..10) == 0 {
-                    state.tentacle_speed = 1.0 / (rand::random::<f32>() + 1.0) * 0.2;
+                    state.tentacle_speed = rand::random_range(0.1..0.2);
                 }
             }
 
@@ -305,7 +305,7 @@ impl SquidEntity {
                 x_body_rot: 0.0,
                 x_body_rot_old: 0.0,
                 movement_vector: DVec3::ZERO,
-                tentacle_speed: 1.0 / (rand::random::<f32>() + 1.0) * 0.2,
+                tentacle_speed: rand::random_range(0.1..0.2),
                 tentacle_movement: 0.0,
             }),
         }
@@ -423,7 +423,7 @@ impl LivingEntity for SquidEntity {
     }
 
     fn base_experience_reward(&self) -> i32 {
-        1 + rand::random_range(0..3)
+        rand::random_range(1..4)
     }
 }
 
