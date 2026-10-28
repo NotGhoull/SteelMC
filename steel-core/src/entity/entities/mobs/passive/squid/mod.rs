@@ -39,6 +39,8 @@ use crate::{
     player::Player,
 };
 
+const SQUID_DEFAULT_HEALTH: f64 = 10.0;
+
 const SQUID_BABY_WIDTH: f32 = 0.5;
 const SQUID_BABY_HEIGHT: f32 = 0.5;
 const SQUID_BABY_EYE_HEIGHT: f32 = 0.37;
@@ -61,6 +63,7 @@ const SQUID_AMBIENT_SOUND_INTERVAL: i32 = 120;
 
 const SQUID_SQUIRT_SOUND: SoundEventRef = &sound_events::ENTITY_SQUID_SQUIRT;
 const SQUID_MOVEMENT_THRESHOLD: f64 = 1.0e-5;
+const SQUID_TENTICLE_SCALE_MOVEMENT_THRESHOLD: f32 = 7.5;
 
 // TODO(ageable-water-creature): vanilla `Squid extends AgeableWaterCreature`.
 // Still missing from that layer: `checkSpawnObstruction`.
@@ -193,7 +196,7 @@ impl SquidEntity {
             if tentacle_movement < PI as f32 {
                 let tentacle_scale = tentacle_movement / PI as f32;
 
-                if tentacle_scale > 0.75 {
+                if tentacle_scale > SQUID_TENTICLE_SCALE_MOVEMENT_THRESHOLD {
                     self.set_velocity(DVec3::new(
                         movement_vector.x,
                         movement_vector.y,
@@ -275,7 +278,7 @@ impl SquidEntity {
         living_base
             .attributes()
             .lock()
-            .set_base_value(vanilla_attributes::MAX_HEALTH, 10.0);
+            .set_base_value(vanilla_attributes::MAX_HEALTH, SQUID_DEFAULT_HEALTH);
 
         let mob_base = MobBase::new();
         mob_base
