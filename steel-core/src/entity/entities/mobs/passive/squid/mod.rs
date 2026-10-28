@@ -174,7 +174,7 @@ impl SquidEntity {
                 state.tentacle_movement -= TAU as f32;
 
                 if rand::random_range(0..10) == 0 {
-                    state.tentacle_speed = rand::random_range(0.1..0.2);
+                    state.tentacle_speed = 1.0 / (rand::random::<f32>() + 1.0) * 0.2;
                 }
             }
 
@@ -305,7 +305,7 @@ impl SquidEntity {
                 x_body_rot: 0.0,
                 x_body_rot_old: 0.0,
                 movement_vector: DVec3::ZERO,
-                tentacle_speed: rand::random_range(0.1..0.2),
+                tentacle_speed: 1.0 / (rand::random::<f32>() + 1.0) * 0.2,
                 tentacle_movement: 0.0,
             }),
         }
