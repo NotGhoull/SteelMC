@@ -487,15 +487,6 @@ pub(super) fn leash_holder_movement(entity: &dyn Entity) -> DVec3 {
     entity.known_movement()
 }
 
-pub(super) fn rotate_y(vector: DVec3, radians: f32) -> DVec3 {
-    let cos = f64::from(trig::cos(radians));
-    let sin = f64::from(trig::sin(radians));
-    DVec3::new(
-        vector.x * cos + vector.z * sin,
-        vector.y,
-        vector.z * cos - vector.x * sin,
-    )
-}
 pub(super) fn axis_specific_leash_elasticity(force: DVec3) -> DVec3 {
     force * LEASH_AXIS_SPECIFIC_ELASTICITY
 }
