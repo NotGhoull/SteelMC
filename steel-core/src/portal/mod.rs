@@ -9,7 +9,10 @@ use crate::world::World;
 use glam::DVec3;
 use smallvec::SmallVec;
 use std::sync::Arc;
-use steel_math::{DEGREE_90, trig};
+use steel_math::{
+    DEGREE_90,
+    vector::{x_rot, y_rot},
+}
 use steel_protocol::packets::game::RelativeMovement;
 use steel_registry::game_rules::GameRuleRef;
 use steel_registry::vanilla_game_rules::{
@@ -431,7 +434,6 @@ fn rotate_y(vec: DVec3, radians: f32) -> DVec3 {
     let cos = f64::from(trig::cos(radians));
     let sin = f64::from(trig::sin(radians));
     DVec3::new(vec.x * cos + vec.z * sin, vec.y, vec.z * cos - vec.x * sin)
-}
 
 /// A queued request to move an entity between loaded worlds.
 ///

@@ -5,7 +5,7 @@ use crate::entity::{Entity, Mob, SharedEntity, WeakEntity};
 use glam::DVec3;
 use simdnbt::borrow::NbtCompound as BorrowedNbtCompoundView;
 use simdnbt::owned::{NbtCompound, NbtTag};
-use steel_math::{DEG_TO_RAD, trig};
+use steel_math::{DEG_TO_RAD, vector::y_rot};
 use steel_protocol::packets::game::SoundSource;
 use steel_registry::blocks::block_state_ext::BlockStateExt;
 use steel_registry::item_stack::ItemStack;
@@ -496,7 +496,6 @@ pub(super) fn rotate_y(vector: DVec3, radians: f32) -> DVec3 {
         vector.z * cos - vector.x * sin,
     )
 }
-
 pub(super) fn axis_specific_leash_elasticity(force: DVec3) -> DVec3 {
     force * LEASH_AXIS_SPECIFIC_ELASTICITY
 }
